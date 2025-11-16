@@ -11,7 +11,7 @@
       margin: 0;
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
       background-color: #ffffff;
-      overflow: hidden; /* prevents scrollbars */
+      overflow: hidden;
     }
 
     /* Background layer */
@@ -21,32 +21,29 @@
       inset: 0;
       z-index: 0;
 
-      /* repeating “lutz” SVG pattern */
+      /* repeating “lutz” text */
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='120'><text x='0' y='70' font-family='Arial' font-size='48' opacity='0.06'>lutz lutz lutz lutz lutz</text></svg>");
       background-repeat: repeat;
 
-      /* rotate the entire background 45° */
-      transform: rotate(45deg) scale(1.5);
+      /* Rotate the whole pattern 45° */
+      transform: rotate(45deg) scale(1.4);
       transform-origin: center;
 
-      /* smooth look */
-      -webkit-font-smoothing: antialiased;
-
-      /* scrolling animation */
-      animation: scrollbg 30s linear infinite;
+      /* Animate the pattern INSIDE the rotated plane */
+      animation: diagonalScroll 15s linear infinite;
     }
 
-    /* Diagonal scroll animation */
-    @keyframes scrollbg {
+    /* Scroll the background in place along a -45° diagonal */
+    @keyframes diagonalScroll {
       from {
         background-position: 0 0;
       }
       to {
-        background-position: 600px 600px; /* adjust speed/direction here */
+        background-position: 300px -300px;
       }
     }
 
-    /* Foreground container */
+    /* Foreground */
     .wrap {
       position: relative;
       z-index: 1;
@@ -54,18 +51,15 @@
       display: grid;
       place-items: center;
       text-align: center;
-      padding: 2rem;
-      box-sizing: border-box;
     }
 
-    /* Main title */
     h1 {
       margin: 0;
       font-size: clamp(48px, 12vw, 18vw);
       font-weight: 900;
       text-transform: uppercase;
       color: #0b1220;
-      text-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      text-shadow: 0 3px 10px rgba(0,0,0,0.14);
       line-height: .85;
     }
   </style>
