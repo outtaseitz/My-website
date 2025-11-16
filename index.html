@@ -4,83 +4,76 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>LUTZ ON THE WEB</title>
+
   <style>
-    /* Page reset */
-    html,body {
+    html, body {
       height: 100%;
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background-color: #fff;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background-color: #ffffff;
+      overflow: hidden; /* prevents scrollbars */
     }
 
-    /* Repeating 'lutz' background using an inline SVG as a repeating background image.
-       The SVG uses low opacity so the foreground text remains dominant. */
-    body::before{
+    /* Background layer */
+    body::before {
       content: "";
       position: fixed;
       inset: 0;
       z-index: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='120' viewBox='0 0 300 120'><text x='0' y='70' font-family='Arial, Helvetica, sans-serif' font-size='48' fill='0,0,0' opacity='0.06'>lutz lutz lutz lutz lutz lutz</text></svg>");
+
+      /* repeating “lutz” SVG pattern */
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='120'><text x='0' y='70' font-family='Arial' font-size='48' opacity='0.06'>lutz lutz lutz lutz lutz</text></svg>");
       background-repeat: repeat;
-      /* rotate and scale the pattern for a dynamic look */
-      transform: rotate(-8deg) scale(1.05);
+
+      /* rotate the entire background 45° */
+      transform: rotate(45deg) scale(1.5);
       transform-origin: center;
-      /* subtle smoothing */
+
+      /* smooth look */
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      pointer-events: none; /* allow clicks through the background */
+
+      /* scrolling animation */
+      animation: scrollbg 30s linear infinite;
     }
 
-    /* Container for the foreground content */
+    /* Diagonal scroll animation */
+    @keyframes scrollbg {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 600px 600px; /* adjust speed/direction here */
+      }
+    }
+
+    /* Foreground container */
     .wrap {
-      min-height: 100%;
+      position: relative;
+      z-index: 1;
+      height: 100%;
       display: grid;
       place-items: center;
       text-align: center;
-      padding: 4vh 4vw;
+      padding: 2rem;
       box-sizing: border-box;
-      position: relative;
-      z-index: 1; /* above background */
     }
 
-    /* Foreground headline */
+    /* Main title */
     h1 {
       margin: 0;
-      line-height: 0.85;
-      letter-spacing: -0.02em;
-      /* responsive large sizing: from 48px up to 18vw */
       font-size: clamp(48px, 12vw, 18vw);
       font-weight: 900;
       text-transform: uppercase;
-      color: #0b1220; /* near-black for strong contrast */
-      text-shadow:
-        0 2px 8px rgba(11,18,32,0.12),
-        0 1px 0 rgba(255,255,255,0.02) inset;
-      padding: 0 1rem;
-      word-break: keep-all;
-    }
-
-    /* Small subhead optional */
-    .sub {
-      margin-top: 0.5rem;
-      font-size: clamp(14px, 2.5vw, 20px);
-      color: rgba(11,18,32,0.7);
-      font-weight: 600;
-      letter-spacing: 0.08em;
-    }
-
-    /* Make sure things look fine on very small screens */
-    @media (max-width:420px){
-      body::before { transform: rotate(-6deg) scale(1); }
-      h1 { letter-spacing: -0.01em; }
+      color: #0b1220;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      line-height: .85;
     }
   </style>
 </head>
+
 <body>
-  <div class="wrap" role="main">
+  <div class="wrap">
     <h1>LUTZ ON THE WEB</h1>
-    <!-- Optional subhead - remove if you don't want it -->
-    <div class="sub" aria-hidden="true">A very simple static page</div>
   </div>
 </body>
 </html>
