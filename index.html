@@ -7,34 +7,19 @@
     <style>
         /*
         =====================================
-        TEXT REPEATING BACKGROUND CSS
+        PURE TEXT REPEATING BACKGROUND CSS
         =====================================
         */
         .text-background {
-            /* 1. Define the angle and base colors */
-            background-image: repeating-linear-gradient(
-                45deg,
-                rgba(0, 0, 0, 0.05) 0px, /* Light grey/transparent stripe start */
-                rgba(0, 0, 0, 0.05) 20px, /* Light grey/transparent stripe end */
-                transparent 20px,
-                transparent 40px
-            );
-            /* 2. Add the text pattern on top */
+            /* This embeds the SVG image of the word "LUTZ" rotated 45 degrees.
+            I've increased the font size and font weight for better visibility.
+            */
             background-image: 
-                /* This is the complex part: the repeating text pattern */
-                url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><text x='0' y='100' font-family='Arial, sans-serif' font-size='30' fill='rgba(0,0,0,0.05)' transform='rotate(45, 0, 100)'>LUTZ</text><text x='100' y='200' font-family='Arial, sans-serif' font-size='30' fill='rgba(0,0,0,0.05)' transform='rotate(45, 100, 200)'>LUTZ</text></svg>"),
-                /* We keep the angled gradient as a secondary layer for texture */
-                repeating-linear-gradient(
-                    45deg,
-                    rgba(0, 0, 0, 0.03) 0px,
-                    rgba(0, 0, 0, 0.03) 20px,
-                    transparent 20px,
-                    transparent 40px
-                );
+                url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='150'><text x='0' y='100' font-family='Arial Black, sans-serif' font-size='40' font-weight='900' fill='rgba(0,0,0,0.07)' transform='rotate(45, 0, 100)'>LUTZ</text><text x='125' y='125' font-family='Arial Black, sans-serif' font-size='40' font-weight='900' fill='rgba(0,0,0,0.07)' transform='rotate(45, 125, 125)'>LUTZ</text></svg>");
             
-            /* 3. Control how the background behaves */
-            background-size: 200px 200px; /* Set the size for the repeating pattern */
-            background-attachment: fixed; /* Optional: Makes the background stay put when scrolling */
+            /* Set the repeating tile size */
+            background-size: 250px 150px; 
+            background-attachment: fixed;
         }
         
         /*
@@ -47,29 +32,25 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #FFFFFF; /* Plain white base background */
-            color: #111111; /* Dark text color */
+            background-color: #FFFFFF;
+            color: #111111;
         }
-        /* Apply the new background class to the body */
         body {
-            /* This is a modern way to center content */
             display: grid;
             place-items: center;
-            /* Apply the new background style here */
-            
         }
 
         h1 {
-            font-size: 8vw; /* 'vw' means 'viewport width' - it scales with the browser window */
+            font-size: 8vw;
             text-align: center;
-            font-weight: 700; /* A good, strong font weight */
-            /* Add some padding and a light background to make the title pop over the repeating text */
+            font-weight: 700;
             padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white box */
+            /* Using a white background with high transparency to ensure the heading text is readable */
+            background-color: rgba(255, 255, 255, 0.9); 
             border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adds a little lift/pop */
         }
 
-        /* This makes the font a bit smaller on small mobile phones */
         @media (max-width: 600px) {
             h1 {
                 font-size: 14vw;
