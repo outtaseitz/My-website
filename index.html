@@ -7,53 +7,64 @@
     <style>
         /*
         =====================================
-        PURE TEXT REPEATING BACKGROUND CSS
-        =====================================
-        */
-        .text-background {
-            /* This embeds the SVG image of the word "LUTZ" rotated 45 degrees.
-            I've increased the font size and font weight for better visibility.
-            */
-            background-image: 
-                url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='150'><text x='0' y='100' font-family='Arial Black, sans-serif' font-size='40' font-weight='900' fill='rgba(0,0,0,0.07)' transform='rotate(45, 0, 100)'>LUTZ</text><text x='125' y='125' font-family='Arial Black, sans-serif' font-size='40' font-weight='900' fill='rgba(0,0,0,0.07)' transform='rotate(45, 125, 125)'>LUTZ</text></svg>");
-            
-            /* Set the repeating tile size */
-            background-size: 250px 150px; 
-            background-attachment: fixed;
-        }
-        
-        /*
-        =====================================
-        EXISTING STYLES
+        CORE STYLES
         =====================================
         */
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: #FFFFFF;
             color: #111111;
         }
+        
         body {
+            /* This is a modern way to center content */
             display: grid;
             place-items: center;
+            /* Apply the new background style */
+            background-color: #f7f7f7; /* Slightly off-white for better contrast */
         }
 
+        /*
+        =====================================
+        REPEATING TEXT BACKGROUND
+        =====================================
+        */
+        .text-background {
+            /* We use a single, rotated "LUTZ" in the SVG tile.
+               The fill color is set to 0.05 opacity (5%) for subtlety. */
+            background-image: 
+                url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='250'><text x='25' y='125' font-family='sans-serif' font-size='50' font-weight='700' fill='rgba(0,0,0,0.05)' transform='rotate(45, 25, 125)'>LUTZ</text></svg>");
+            
+            /* Set the repeating tile size. Adjusting this size changes the density. */
+            background-size: 250px 250px; 
+            background-attachment: fixed;
+        }
+
+        /*
+        =====================================
+        HEADING STYLES
+        =====================================
+        */
         h1 {
             font-size: 8vw;
             text-align: center;
-            font-weight: 700;
-            padding: 10px 20px;
-            /* Using a white background with high transparency to ensure the heading text is readable */
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adds a little lift/pop */
+            font-weight: 900;
+            padding: 20px 40px;
+            /* Use a rounded, slightly transparent card to lift the text off the background */
+            background-color: rgba(255, 255, 255, 0.95); 
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+            letter-spacing: 2px;
         }
 
+        /* Responsive adjustment for small screens */
         @media (max-width: 600px) {
             h1 {
                 font-size: 14vw;
+                padding: 15px 30px;
             }
         }
     </style>
@@ -64,3 +75,4 @@
 
 </body>
 </html>
+
