@@ -1,78 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUTZ ON THE WEB</title>
-    <style>
-        /*
-        =====================================
-        CORE STYLES
-        =====================================
-        */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #FFFFFF;
-            color: #111111;
-        }
-        
-        body {
-            /* This is a modern way to center content */
-            display: grid;
-            place-items: center;
-            /* Apply the new background style */
-            background-color: #f7f7f7; /* Slightly off-white for better contrast */
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LUTZ ON THE WEB</title>
+  <style>
+    /* Page reset */
+    html,body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background-color: #fff;
+    }
 
-        /*
-        =====================================
-        REPEATING TEXT BACKGROUND
-        =====================================
-        */
-        .text-background {
-            /* We use a single, rotated "LUTZ" in the SVG tile.
-               The fill color is set to 0.05 opacity (5%) for subtlety. */
-            background-image: 
-                url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='250'><text x='25' y='125' font-family='sans-serif' font-size='50' font-weight='700' fill='rgba(0,0,0,0.05)' transform='rotate(45, 25, 125)'>LUTZ</text></svg>");
-            
-            /* Set the repeating tile size. Adjusting this size changes the density. */
-            background-size: 250px 250px; 
-            background-attachment: fixed;
-        }
+    /* Repeating 'lutz' background using an inline SVG as a repeating background image.
+       The SVG uses low opacity so the foreground text remains dominant. */
+    body::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='120' viewBox='0 0 300 120'><text x='0' y='70' font-family='Arial, Helvetica, sans-serif' font-size='48' fill='0,0,0' opacity='0.06'>lutz lutz lutz lutz lutz lutz</text></svg>");
+      background-repeat: repeat;
+      /* rotate and scale the pattern for a dynamic look */
+      transform: rotate(-8deg) scale(1.05);
+      transform-origin: center;
+      /* subtle smoothing */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      pointer-events: none; /* allow clicks through the background */
+    }
 
-        /*
-        =====================================
-        HEADING STYLES
-        =====================================
-        */
-        h1 {
-            font-size: 8vw;
-            text-align: center;
-            font-weight: 900;
-            padding: 20px 40px;
-            /* Use a rounded, slightly transparent card to lift the text off the background */
-            background-color: rgba(255, 255, 255, 0.95); 
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
-            letter-spacing: 2px;
-        }
+    /* Container for the foreground content */
+    .wrap {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 4vh 4vw;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1; /* above background */
+    }
 
-        /* Responsive adjustment for small screens */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 14vw;
-                padding: 15px 30px;
-            }
-        }
-    </style>
+    /* Foreground headline */
+    h1 {
+      margin: 0;
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      /* responsive large sizing: from 48px up to 18vw */
+      font-size: clamp(48px, 12vw, 18vw);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #0b1220; /* near-black for strong contrast */
+      text-shadow:
+        0 2px 8px rgba(11,18,32,0.12),
+        0 1px 0 rgba(255,255,255,0.02) inset;
+      padding: 0 1rem;
+      word-break: keep-all;
+    }
+
+    /* Small subhead optional */
+    .sub {
+      margin-top: 0.5rem;
+      font-size: clamp(14px, 2.5vw, 20px);
+      color: rgba(11,18,32,0.7);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    /* Make sure things look fine on very small screens */
+    @media (max-width:420px){
+      body::before { transform: rotate(-6deg) scale(1); }
+      h1 { letter-spacing: -0.01em; }
+    }
+  </style>
 </head>
-<body class="text-background">
-    
+<body>
+  <div class="wrap" role="main">
     <h1>LUTZ ON THE WEB</h1>
-
+    <!-- Optional subhead - remove if you don't want it -->
+    <div class="sub" aria-hidden="true">A very simple static page</div>
+  </div>
 </body>
 </html>
-
