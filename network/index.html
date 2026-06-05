@@ -1,0 +1,294 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Network Map | LUTZ ON THE WEB</title>  <style>
+    :root {
+      --bg: #03040a;
+      --card: rgba(8, 12, 28, 0.72);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --cyan: #00eaff;
+      --purple: #8a2cff;
+      --text: #eaffff;
+      --muted: rgba(234, 255, 255, 0.72);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(0, 234, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(138, 44, 255, 0.18), transparent 28%),
+        linear-gradient(135deg, #02030a 0%, #071020 50%, #02030a 100%);
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 75%);
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 52px;
+    }
+
+    .brand {
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .back {
+      text-decoration: none;
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 8vw, 88px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 18px rgba(0, 234, 255, 0.55),
+        0 0 54px rgba(138, 44, 255, 0.35);
+    }
+
+    .intro {
+      max-width: 780px;
+      margin: 24px 0 36px;
+      font-size: clamp(18px, 2.2vw, 24px);
+      color: var(--muted);
+    }
+
+    .map-card {
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 24px;
+      background: var(--card);
+      box-shadow:
+        0 0 40px rgba(0, 234, 255, 0.08),
+        inset 0 0 28px rgba(255,255,255,0.025);
+      backdrop-filter: blur(16px);
+      overflow-x: auto;
+    }
+
+    .network-map {
+      min-width: 820px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .node {
+      min-width: 180px;
+      padding: 16px;
+      border: 1px solid rgba(0, 234, 255, 0.28);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.045);
+      box-shadow: 0 0 22px rgba(0, 234, 255, 0.08);
+      text-align: center;
+    }
+
+    .node strong {
+      display: block;
+      color: var(--cyan);
+      font-size: 18px;
+    }
+
+    .node span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .line {
+      height: 26px;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(0,234,255,0.8), rgba(138,44,255,0.7));
+      margin: 0 auto;
+    }
+
+    .section-title {
+      margin: 28px 0 12px;
+      color: rgba(234,255,255,0.86);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 42px;
+      color: rgba(234,255,255,0.48);
+      text-align: center;
+      font-size: 14px;
+    }
+  </style></head><body>
+  <main class="page">
+    <nav class="nav">
+      <a class="brand" href="/">Lutz</a>
+      <a class="back" href="/homelab/">Back to homelab</a>
+    </nav><section>
+  <p class="eyebrow">Network Map</p>
+  <h1>Homelab topology</h1>
+  <p class="intro">
+    A high-level map of the home network, including internet edge, firewall,
+    switching, wireless, VLANs, virtualization, storage, and hosted services.
+  </p>
+</section>
+
+<section class="map-card">
+  <div class="network-map">
+    <div class="row">
+      <div class="node">
+        <strong>Internet</strong>
+        <span>ISP connection</span>
+      </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="row">
+      <div class="node">
+        <strong>Arris S33</strong>
+        <span>DOCSIS modem</span>
+      </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="row">
+      <div class="node">
+        <strong>OPNsense</strong>
+        <span>Firewall • Router • VLANs</span>
+      </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="row">
+      <div class="node">
+        <strong>Cisco SG300</strong>
+        <span>Managed switch • PoE • trunks</span>
+      </div>
+    </div>
+
+    <div class="section-title">Network Segments</div>
+
+    <div class="row">
+      <div class="node">
+        <strong>VLAN 5</strong>
+        <span>Home network</span>
+      </div>
+      <div class="node">
+        <strong>VLAN 10</strong>
+        <span>Servers / testing</span>
+      </div>
+      <div class="node">
+        <strong>VLAN 20</strong>
+        <span>IoT devices</span>
+      </div>
+      <div class="node">
+        <strong>VLAN 30</strong>
+        <span>Cloudflare tunnel</span>
+      </div>
+    </div>
+
+    <div class="section-title">Core Systems</div>
+
+    <div class="row">
+      <div class="node">
+        <strong>Proxmox Cluster</strong>
+        <span>VMs • LXCs • Docker hosts</span>
+      </div>
+      <div class="node">
+        <strong>TrueNAS</strong>
+        <span>Storage • shares • backups</span>
+      </div>
+      <div class="node">
+        <strong>UniFi U7 Pro</strong>
+        <span>Wi-Fi • SSIDs • VLAN tagging</span>
+      </div>
+    </div>
+
+    <div class="section-title">Hosted Services</div>
+
+    <div class="row">
+      <div class="node">
+        <strong>Media Stack</strong>
+        <span>Jellyfin • Sonarr • Radarr • qBit</span>
+      </div>
+      <div class="node">
+        <strong>DNS</strong>
+        <span>Pi-hole • Unbound</span>
+      </div>
+      <div class="node">
+        <strong>Monitoring</strong>
+        <span>Prometheus • Grafana • ntfy</span>
+      </div>
+      <div class="node">
+        <strong>Remote Access</strong>
+        <span>Guacamole • Cloudflare Tunnel</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  LUTZ ON THE WEB • Network map
+</footer>
+
+  </main>
+</body>
+</html>
