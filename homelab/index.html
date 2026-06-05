@@ -1,0 +1,400 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Homelab | LUTZ ON THE WEB</title>  <style>
+    :root {
+      --bg: #03040a;
+      --card: rgba(8, 12, 28, 0.72);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --cyan: #00eaff;
+      --purple: #8a2cff;
+      --text: #eaffff;
+      --muted: rgba(234, 255, 255, 0.72);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(0, 234, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(138, 44, 255, 0.18), transparent 28%),
+        linear-gradient(135deg, #02030a 0%, #071020 50%, #02030a 100%);
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 75%);
+    }
+
+    a {
+      color: var(--cyan);
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 64px;
+    }
+
+    .brand {
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .back {
+      text-decoration: none;
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .hero {
+      margin-bottom: 42px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 900px;
+      font-size: clamp(42px, 8vw, 96px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 18px rgba(0, 234, 255, 0.55),
+        0 0 54px rgba(138, 44, 255, 0.35);
+    }
+
+    .intro {
+      max-width: 780px;
+      margin: 24px 0 0;
+      font-size: clamp(18px, 2.2vw, 24px);
+      color: var(--muted);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 36px 0 44px;
+    }
+
+    .stat {
+      padding: 18px;
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.045);
+      backdrop-filter: blur(14px);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+      color: var(--cyan);
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--card-border);
+      border-radius: 26px;
+      padding: 24px;
+      background: var(--card);
+      box-shadow:
+        0 0 40px rgba(0, 234, 255, 0.08),
+        inset 0 0 28px rgba(255,255,255,0.025);
+      backdrop-filter: blur(16px);
+    }
+
+    .card.wide {
+      grid-column: 1 / -1;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      color: var(--text);
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      border: 1px solid rgba(0, 234, 255, 0.26);
+      border-radius: 999px;
+      padding: 7px 11px;
+      background: rgba(0, 234, 255, 0.07);
+      color: rgba(234,255,255,0.9);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .item {
+      padding-left: 18px;
+      border-left: 2px solid rgba(0, 234, 255, 0.45);
+    }
+
+    .item h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .item p {
+      margin: 4px 0 0;
+    }
+
+    footer {
+      margin-top: 42px;
+      color: rgba(234,255,255,0.48);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        margin-bottom: 42px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style></head><body>
+  <main class="page">
+    <nav class="nav">
+      <a class="brand" href="/">Lutz</a>
+      <a class="back" href="/">Back home</a>
+    </nav><section class="hero">
+  <p class="eyebrow">Homelab Portfolio</p>
+  <h1>Built, broken, fixed, and learned at home.</h1>
+  <p class="intro">
+    A personal infrastructure lab focused on virtualization, networking, self-hosting,
+    automation, monitoring, media services, and real-world IT problem solving.
+  </p>
+</section>
+
+<section class="stats">
+  <div class="stat">
+    <strong>5</strong>
+    <span>Proxmox nodes</span>
+  </div>
+  <div class="stat">
+    <strong>4+</strong>
+    <span>Network VLANs</span>
+  </div>
+  <div class="stat">
+    <strong>20+</strong>
+    <span>Self-hosted services</span>
+  </div>
+  <div class="stat">
+    <strong>24/7</strong>
+    <span>Monitoring mindset</span>
+  </div>
+</section>
+
+<section class="grid">
+  <article class="card wide">
+    <h2>Overview</h2>
+    <p>
+      My homelab is a hands-on environment where I design, deploy, and troubleshoot
+      infrastructure similar to what is used in small business IT environments. It includes
+      virtualization, firewall routing, VLAN segmentation, Docker services, storage, monitoring,
+      remote access, DNS filtering, VPN routing, and automation projects.
+    </p>
+
+    <div class="tags">
+      <span class="tag">Proxmox</span>
+      <span class="tag">OPNsense</span>
+      <span class="tag">Docker</span>
+      <span class="tag">Cloudflare</span>
+      <span class="tag">TrueNAS</span>
+      <span class="tag">Grafana</span>
+      <span class="tag">Power BI</span>
+      <span class="tag">n8n</span>
+    </div>
+  </article>
+
+  <article class="card">
+    <h2>Core Infrastructure</h2>
+    <ul>
+      <li>Multi-node Proxmox virtualization cluster</li>
+      <li>OPNsense firewall/router with VLAN segmentation</li>
+      <li>UniFi wireless with multiple SSIDs mapped to VLANs</li>
+      <li>Cisco managed switch for trunking and PoE</li>
+      <li>TrueNAS storage for shared data and services</li>
+    </ul>
+  </article>
+
+  <article class="card">
+    <h2>Networking</h2>
+    <ul>
+      <li>Separate VLANs for home, servers, IoT, and tunnel services</li>
+      <li>Firewall rules for isolation and controlled access</li>
+      <li>Pi-hole and Unbound DNS filtering/resolution</li>
+      <li>Cloudflare Tunnel for secure external access</li>
+      <li>VPN routing experiments with NordVPN, Mullvad, WireGuard, and Gluetun</li>
+    </ul>
+  </article>
+
+  <article class="card">
+    <h2>Self-Hosted Services</h2>
+    <ul>
+      <li>Jellyfin media server with supporting automation tools</li>
+      <li>Sonarr, Radarr, Prowlarr, qBittorrent, and Gluetun</li>
+      <li>Nextcloud for private file access</li>
+      <li>Guacamole for browser-based remote access</li>
+      <li>Mealie, ntfy, Homepage, Portainer, and other utility services</li>
+    </ul>
+  </article>
+
+  <article class="card">
+    <h2>Monitoring & Reliability</h2>
+    <ul>
+      <li>Prometheus and Grafana dashboards</li>
+      <li>Node Exporter and cAdvisor metrics</li>
+      <li>Gateway monitoring and packet-loss troubleshooting</li>
+      <li>Service health checks and notification workflows</li>
+      <li>Hands-on troubleshooting of modem, routing, DNS, and VLAN issues</li>
+    </ul>
+  </article>
+
+  <article class="card wide">
+    <h2>Automation & Data Projects</h2>
+    <div class="timeline">
+      <div class="item">
+        <h3>M3 / Power BI Proof of Concept</h3>
+        <p>
+          Built a proof-of-concept pipeline using FastAPI, PostgreSQL, n8n, Grafana,
+          and Power BI concepts to model shipment forecasting data.
+        </p>
+      </div>
+      <div class="item">
+        <h3>Workflow Automation</h3>
+        <p>
+          Used n8n webhooks and function nodes to receive, transform, store,
+          and query operational data.
+        </p>
+      </div>
+      <div class="item">
+        <h3>Notification Systems</h3>
+        <p>
+          Connected self-hosted services to ntfy for request alerts, service checks,
+          and operational notifications.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <article class="card wide">
+    <h2>Skills Demonstrated</h2>
+    <div class="tags">
+      <span class="tag">Virtualization</span>
+      <span class="tag">Linux Administration</span>
+      <span class="tag">Docker Compose</span>
+      <span class="tag">Firewall Rules</span>
+      <span class="tag">VLANs</span>
+      <span class="tag">DNS</span>
+      <span class="tag">VPNs</span>
+      <span class="tag">Monitoring</span>
+      <span class="tag">Storage</span>
+      <span class="tag">APIs</span>
+      <span class="tag">SQL</span>
+      <span class="tag">Automation</span>
+      <span class="tag">Troubleshooting</span>
+    </div>
+  </article>
+</section>
+
+<footer>
+  LUTZ ON THE WEB • Homelab, self-hosting, and practical IT learning
+</footer>
+
+  </main>
+</body>
+</html>
