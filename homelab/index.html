@@ -112,6 +112,38 @@
       color: var(--muted);
     }
 
+    .cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border: 1px solid rgba(0, 234, 255, 0.45);
+  border-radius: 999px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, rgba(0, 234, 255, 0.10), rgba(138, 44, 255, 0.16));
+  box-shadow: 0 0 22px rgba(0, 234, 255, 0.14);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 234, 255, 0.85);
+  box-shadow:
+    0 0 28px rgba(0, 234, 255, 0.32),
+    0 0 44px rgba(138, 44, 255, 0.18);
+}
+
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -257,6 +289,9 @@
     A personal infrastructure lab focused on virtualization, networking, self-hosting,
     automation, monitoring, media services, and real-world IT problem solving.
   </p>
+<div class="cta-row">
+  <a class="button" href="/network/">View Network Map</a>
+</div>
 </section>
 
 <section class="stats">
